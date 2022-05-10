@@ -29,8 +29,7 @@ class Contenedor {
       const contenido = JSON.parse(
         await fs.promises.readFile(this.nombreArchivo)
       );
-      // Lo que hice fué que a la propiedad id del objeto, le asigno el valor de la longitud del archivo parseado + 1.
-      // Entonces cuando le asigne un id a cada objeto pusheado, va a ser incremental siempre. El método save quedó así:
+
       producto.id = contenido.length + 1;
       contenido.push(producto);
       await fs.promises.writeFile(
@@ -43,6 +42,9 @@ class Contenedor {
     }
   }
 
+  /**
+   * Metodo para obtener todos los productos 
+   */
   async getAll() {
     try {
       const contenido = JSON.parse(
@@ -56,7 +58,11 @@ class Contenedor {
       return [];
     }
   }
-
+/**
+ * Metodo para obtener un producto con su ID random
+ * @param {*} id 
+ * @returns 
+ */
   async getById(id) {
     try {
       const contenidoCrudo = JSON.parse(
@@ -95,6 +101,7 @@ const ejecutarProductos = async () => {
 };
 
 ejecutarProductos();
+
 // -------------------------------------------------------------------------------------------------------
 // Codigo del server
 
@@ -122,6 +129,3 @@ app.listen(8080, () => {
   console.log("Servidor levantado con Expresss");
 });
 
-// Math.random();
-
-// module.exports = Contenedor;
